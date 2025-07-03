@@ -36,7 +36,7 @@ public class ActiveAdsTest extends BaseTest {
                     System.out.println("Продукт " + i);
 
                     Actions.productActions().CheckActive(String.valueOf(i));
-                    if (i == 20) break;
+                    //if (i == 20) break;
                 }
 
 

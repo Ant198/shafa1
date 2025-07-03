@@ -37,7 +37,7 @@ public class DeActiveAdsTest extends BaseTest {
                 System.out.println("Продукт " + i);
 
                 Actions.productActions().CheckDeActive(String.valueOf(i));
-                if (i ==20 ) break;
+                //if (i ==20 ) break;
             }
         } catch (Exception e){
             e.printStackTrace();
