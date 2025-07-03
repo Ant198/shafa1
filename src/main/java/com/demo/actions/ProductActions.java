@@ -88,7 +88,7 @@ public class ProductActions extends PageTools {
                 if (realQty == 0 ) {
                     System.out.println("Товара нет в наличии... Деактивируем");
                     Pages.adPage().clickDeActivateButton();
-                    writeError(id + ", " + name + " | оголошення було деактивоване(немає в наявності) "  + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n", "errors.csv");
+                    writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) "  + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n", "success.csv");
                     goBack();
                 }
                 else {
@@ -104,7 +104,7 @@ public class ProductActions extends PageTools {
         }
         else {
             System.out.println("Предложение не найдено.");
-            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. ", "errors.csv");
+            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. | Активне", "errors.csv");
         }
     }
 
@@ -174,6 +174,7 @@ public class ProductActions extends PageTools {
 
                 System.out.println("Кол-во в файле: " + realQty + ", Кол-во на сайте: " + Pages.adPage().getPrimaryQty());
                 System.out.println("Цена в файле: " + realPrice + ", Цена на сайте: " + Pages.adPage().getPrimaryPrice());
+                System.out.println("Предложение активировано");
 
                 if (realQty != Pages.adPage().getPrimaryQty() || realPrice != Pages.adPage().getPrimaryPrice()) {
                     System.out.println("Обновляем данные");
@@ -187,14 +188,14 @@ public class ProductActions extends PageTools {
             }
             else {
                 System.out.println("Товар есть в листе, но данные остаются актуальными");
-                writeError(id + " | " + name + " | Товар є в наявності, але дані все ще актуальні.", "skipped.csv");
+                writeError(id + " | (Деактивований) " + name + " | Товар є в списку, але дані все ще актуальні.", "skipped.csv");
             }
 
 
         }
         else {
             System.out.println("Предложение не найдено.");
-            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. ", "errors.csv");
+            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. | Деактивоване", "errors.csv");
         }
     }
 
