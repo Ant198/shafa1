@@ -28,12 +28,12 @@ public class ProductActions extends PageTools {
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
         String filePathStr = System.getenv("UPLOAD_FILE");
         if (filePathStr == null) {
-            throw new IllegalStateException("Переменная окружения UPLOAD_FILE не установлена!");
+            throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
 
         File xmlFile = new File(filePathStr);
         if (!xmlFile.exists()) {
-            throw new FileNotFoundException("Файл не найден: " + xmlFile.getAbsolutePath());
+            throw new FileNotFoundException("Файл не знайдено: " + xmlFile.getAbsolutePath());
         }
 
         // Настраиваем парсер XML
@@ -81,30 +81,30 @@ public class ProductActions extends PageTools {
             int realQty = Integer.parseInt(quantityStr.trim());
             int realPrice = Integer.parseInt(price);
 
-            System.out.println("Кол-во в файле: " + realQty + ", Кол-во на сайте: " + Pages.adPage().getPrimaryQty());
-            System.out.println("Цена в файле: " + realPrice + ", Цена на сайте: " + Pages.adPage().getPrimaryPrice());
+            System.out.println("Кількість в файлі: " + realQty + ", Кількість на сайті: " + Pages.adPage().getPrimaryQty());
+            System.out.println("Ціна в файлі: " + realPrice + ", Ціна на сайті: " + Pages.adPage().getPrimaryPrice());
 
             if (realQty != Pages.adPage().getPrimaryQty() || realPrice != Pages.adPage().getPrimaryPrice()) {
                 if (realQty == 0 ) {
-                    System.out.println("Товара нет в наличии... Деактивируем");
+                    System.out.println("Товару нема в наявності... Деактивуємо");
                     Pages.adPage().clickDeActivateButton();
-                    writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) "  + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n", "success.csv");
+                    writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) ", "success.csv");
                     goBack();
                 }
                 else {
-                    System.out.println("Обновляем данные");
+                    System.out.println("Оновлюємо дані");
                     editActions(name, id);
                 }
             }
             else {
-                System.out.println("Товар есть в листе, но данные остаются актуальными");
-                writeError(id + " | " + name + " | Товар є в наявності, але дані все ще актуальні.", "skipped.csv");
+                System.out.println("Товар є в списку, але дані залишаються актуальними");
+                writeError(id + " | " + name + " | Товар є в наявності, але дані все ще актуальні", "skipped.csv");
                 goBack();
             }
         }
         else {
-            System.out.println("Предложение не найдено.");
-            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. | Активне", "errors.csv");
+            System.out.println("Пропозиція не знайдена.");
+            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Активне", "errors.csv");
         }
     }
 
@@ -116,12 +116,12 @@ public class ProductActions extends PageTools {
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
         String filePathStr = System.getenv("UPLOAD_FILE");
         if (filePathStr == null) {
-            throw new IllegalStateException("Переменная окружения UPLOAD_FILE не установлена!");
+            throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
 
         File xmlFile = new File(filePathStr);
         if (!xmlFile.exists()) {
-            throw new FileNotFoundException("Файл не найден: " + xmlFile.getAbsolutePath());
+            throw new FileNotFoundException("Файл не знайдено: " + xmlFile.getAbsolutePath());
         }
 
         // Настраиваем парсер XML
@@ -172,12 +172,12 @@ public class ProductActions extends PageTools {
                 }
                 Pages.adPage().quantityToUpdate = quantityStr;
 
-                System.out.println("Кол-во в файле: " + realQty + ", Кол-во на сайте: " + Pages.adPage().getPrimaryQty());
-                System.out.println("Цена в файле: " + realPrice + ", Цена на сайте: " + Pages.adPage().getPrimaryPrice());
-                System.out.println("Предложение активировано");
+                System.out.println("Кількість в файлі: " + realQty + ", Кількість на сайті: " + Pages.adPage().getPrimaryQty());
+                System.out.println("Ціна в файлі: " + realPrice + ", Ціна на сайті: " + Pages.adPage().getPrimaryPrice());
+                System.out.println("Пропозиція активована");
 
                 if (realQty != Pages.adPage().getPrimaryQty() || realPrice != Pages.adPage().getPrimaryPrice()) {
-                    System.out.println("Обновляем данные");
+                    System.out.println("Оновлюємо дані");
                     editActions(name, id);
                 }
                 else {
@@ -187,15 +187,15 @@ public class ProductActions extends PageTools {
                 }
             }
             else {
-                System.out.println("Товар есть в листе, но данные остаются актуальными");
-                writeError(id + " | (Деактивований) " + name + " | Товар є в списку, але дані все ще актуальні.", "skipped.csv");
+                System.out.println("Товар є у списку, але дані залишаються актуальними");
+                writeError(id + " | (Деактивований) " + name + " | Товар є в списку, але дані все ще актуальні", "skipped.csv");
             }
 
 
         }
         else {
-            System.out.println("Предложение не найдено.");
-            writeError("Предложение " + nameToFind + " | " + vendorCodeToFind + " | не найдено. | Деактивоване", "errors.csv");
+            System.out.println("Пропозиція не знайдена");
+            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Деактивоване", "errors.csv");
         }
     }
 
@@ -209,7 +209,7 @@ public class ProductActions extends PageTools {
     }
 
     public void writeError(String message, String csvFile){
-        if(csvFile.equals("skipped.csv")){
+        if(csvFile.equals("skipped.csv") || csvFile.equals("errors.csv")){
             try(FileWriter writer = new FileWriter(csvFile, true)){
                 writer.append("Товар пропущено: " + message + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n");
             } catch (IOException e) {
@@ -218,7 +218,7 @@ public class ProductActions extends PageTools {
         }
         else{
             try(FileWriter writer = new FileWriter(csvFile, true)){
-                writer.append("Error: " + message + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n");
+                writer.append("Error: " + message + " | " + SelenideTools.getCurrentUrl() + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -232,10 +232,10 @@ public class ProductActions extends PageTools {
         String lastPart = parts[parts.length-1].trim();
 
         if (lastPart.matches("\\d+")){
-            System.out.println("Код продукта: " + lastPart);
+            System.out.println("Код продукту: " + lastPart);
             return lastPart;
         } else {
-            System.out.println("Код не найден");
+            System.out.println("Код не знайден");
             return null;
         }
     }
@@ -244,7 +244,7 @@ public class ProductActions extends PageTools {
         String title = getTrimmedText(Pages.adsPage().getTitleLocator(index));
         String[] parts = title.split("[|│]");
         String lastPart = parts[0].trim();
-        System.out.println("Название: " + lastPart);
+        System.out.println("Назва: " + lastPart);
 
         return lastPart;
     }
@@ -294,31 +294,31 @@ public class ProductActions extends PageTools {
 
         if(!Objects.equals(Pages.adPage().priceToUpdate, "")){
             Pages.editPage().updatePrice(Pages.adPage().priceToUpdate);
-            System.out.println("Обновили цену");
+            System.out.println("Оновили ціну");
         }
 
         if(!Objects.equals(Pages.adPage().quantityToUpdate, "")){
             Pages.editPage().updateQuantity(Pages.adPage().quantityToUpdate);
-            System.out.println("Обновили кол-во");
+            System.out.println("Оновили кількість");
 
         }
 
         Pages.editPage().clickSaveButton();
-        System.out.println("Попытались сохранить");
+        System.out.println("Намагаємось зберегти");
         Selenide.sleep(3000);
 
         if(Pages.editPage().isError()){
-            System.out.println("Ошибка на странице редактирования");
-            writeError(id + " | " + name + " | Не оновилось по технічним причинам ", "blocked.csv");
+            System.out.println("Помилка на сторінці редагування");
+            writeError(id + " | " + name + " | Не оновилось через помилку на етапі редагування | " + Actions.mainActions().getBrowserLog(), "blocked.csv");
 
         }
         else if(Pages.adPage().isPageLoaded()){
-            System.out.println("Успешно обновлено");
+            System.out.println("Успішно оновлено");
                 writeLine(id, name, Pages.adPage().priceToUpdate, Pages.adPage().quantityToUpdate, "success.csv");
         }
         else{
-            System.out.println("Ошибки нет но и обновлений тоже");
-            writeError(id + " | " + name + " | Не оновилось по технічним причинам", "blocked.csv");
+            System.out.println("Помилки нема але й оновлення також");
+            writeError(id + " | " + name + " | Не оновилось через відсутність подій після натискання на кнопку \"Зберегти зміни\" | ", "blocked.csv");
         }
         goBack();
 
