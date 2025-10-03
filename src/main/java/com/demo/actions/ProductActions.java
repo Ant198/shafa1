@@ -88,7 +88,7 @@ public class ProductActions extends PageTools {
                 if (realQty == 0 ) {
                     System.out.println("Товару нема в наявності... Деактивуємо");
                     Pages.adPage().clickDeActivateButton();
-                    writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) ", "success.csv");
+                    writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) ", "success.txt");
                     goBack();
                 }
                 else {
@@ -98,13 +98,13 @@ public class ProductActions extends PageTools {
             }
             else {
                 System.out.println("Товар є в списку, але дані залишаються актуальними");
-                writeError(id + " | " + name + " | Товар є в наявності, але дані все ще актуальні", "skipped.csv");
+                writeError(id + " | " + name + " | Товар є в наявності, але дані все ще актуальні", "skipped.txt");
                 goBack();
             }
         }
         else {
             System.out.println("Пропозиція не знайдена.");
-            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Активне", "errors.csv");
+            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Активне", "errors.txt");
         }
     }
 
@@ -182,20 +182,20 @@ public class ProductActions extends PageTools {
                 }
                 else {
                     System.out.println("Товар Активовано");
-                    writeLine(id, name, Pages.adPage().priceToUpdate, Pages.adPage().quantityToUpdate, "success.csv");
+                    writeLine(id, name, Pages.adPage().priceToUpdate, Pages.adPage().quantityToUpdate, "success.txt");
                     goBack();
                 }
             }
             else {
                 System.out.println("Товар є у списку, але дані залишаються актуальними");
-                writeError(id + " | (Деактивований) " + name + " | Товар є в списку, але дані все ще актуальні", "skipped.csv");
+                writeError(id + " | (Деактивований) " + name + " | Товар є в списку, але дані все ще актуальні", "skipped.txt");
             }
 
 
         }
         else {
             System.out.println("Пропозиція не знайдена");
-            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Деактивоване", "errors.csv");
+            writeError("Пропозиція " + nameToFind + " | " + vendorCodeToFind + " | не найдена | Деактивоване", "errors.txt");
         }
     }
 
@@ -209,7 +209,7 @@ public class ProductActions extends PageTools {
     }
 
     public void writeError(String message, String csvFile){
-        if(csvFile.equals("skipped.csv") || csvFile.equals("errors.csv")){
+        if(csvFile.equals("skipped.txt") || csvFile.equals("errors.txt")){
             try(FileWriter writer = new FileWriter(csvFile, true)){
                 writer.append("Товар пропущено: " + message + " | " + DateTime.getLocalDateTimeByPattern("yyyy MM dd'|'HH:mm:ss") + "\n");
             } catch (IOException e) {
@@ -309,16 +309,16 @@ public class ProductActions extends PageTools {
 
         if(Pages.editPage().isError()){
             System.out.println("Помилка на сторінці редагування");
-            writeError(id + " | " + name + " | Не оновилось через помилку на етапі редагування | " + Actions.mainActions().getBrowserLog(), "blocked.csv");
+            writeError(id + " | " + name + " | Не оновилось через помилку на етапі редагування | " + Actions.mainActions().getBrowserLog(), "blocked.txt");
 
         }
         else if(Pages.adPage().isPageLoaded()){
             System.out.println("Успішно оновлено");
-                writeLine(id, name, Pages.adPage().priceToUpdate, Pages.adPage().quantityToUpdate, "success.csv");
+                writeLine(id, name, Pages.adPage().priceToUpdate, Pages.adPage().quantityToUpdate, "success.txt");
         }
         else{
             System.out.println("Помилки нема але й оновлення також");
-            writeError(id + " | " + name + " | Не оновилось через відсутність подій після натискання на кнопку \"Зберегти зміни\" | ", "blocked.csv");
+            writeError(id + " | " + name + " | Не оновилось через відсутність подій після натискання на кнопку \"Зберегти зміни\" | ", "blocked.txt");
         }
         goBack();
 
