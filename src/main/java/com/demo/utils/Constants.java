@@ -7,5 +7,7 @@ public class Constants {
 
     public static String PASSWORD = "YkD!Zt9mM&3bfbEC";
 
-    public static String XML_URL = "xml";
+    public static Integer AMOUNTACTIVE = 0;
+
+    public static Integer AMOUNTDEACTIVE = 0;
 }

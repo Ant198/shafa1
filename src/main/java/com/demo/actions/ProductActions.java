@@ -3,6 +3,7 @@ package com.demo.actions;
 import com.codeborne.selenide.Selenide;
 import com.demo.core.base.PageTools;
 import com.demo.pages.Pages;
+import com.demo.utils.Constants;
 import com.demo.utils.SelenideTools;
 import com.demo.utils.DateTime;
 import org.w3c.dom.Document;
@@ -79,7 +80,7 @@ public class ProductActions extends PageTools {
             Pages.adPage().quantityToUpdate = quantityStr;
 
             int realQty = Integer.parseInt(quantityStr.trim());
-            int realPrice = Integer.parseInt(price);
+            int realPrice = Integer.parseInt(price.substring(0,price.indexOf('.')-1));
 
             System.out.println("Кількість в файлі: " + realQty + ", Кількість на сайті: " + Pages.adPage().getPrimaryQty());
             System.out.println("Ціна в файлі: " + realPrice + ", Ціна на сайті: " + Pages.adPage().getPrimaryPrice());
@@ -88,6 +89,7 @@ public class ProductActions extends PageTools {
                 if (realQty == 0 ) {
                     System.out.println("Товару нема в наявності... Деактивуємо");
                     Pages.adPage().clickDeActivateButton();
+                    Constants.AMOUNTACTIVE =- 1;
                     writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) ", "success.txt");
                     goBack();
                 }
@@ -159,10 +161,11 @@ public class ProductActions extends PageTools {
             String quantityStr = xpath.evaluate("quantity_in_stock", offer);
 
             int realQty = Integer.parseInt(quantityStr.trim());
-            int realPrice = Integer.parseInt(priceStr);
+            int realPrice = Integer.parseInt(priceStr.substring(0,priceStr.indexOf('.')-1));
 
             if (realQty != 0) {
                 Pages.adsPage().clickActivateButton(index);
+                Constants.AMOUNTDEACTIVE =- 1;
                 Pages.adsPage().openProductInNewTab(Integer.parseInt(index));
                 Selenide.sleep(2000);
 

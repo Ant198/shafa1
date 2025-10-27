@@ -4,6 +4,7 @@ import com.demo.actions.Actions;
 import com.demo.actions.ProductActions;
 import com.demo.core.base.BaseTest;
 import com.demo.pages.Pages;
+import com.demo.utils.Constants;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -29,8 +30,9 @@ public class DeActiveAdsTest extends BaseTest {
 
 
         try{
+            Constants.AMOUNTDEACTIVE = Pages.adsPage().getDeActiveProductsAmount();
             //обробка неактивних оголошень
-            for(int i = 1; i < Pages.adsPage().getDeActiveProductsAmount(); i++){
+            for(int i = 1; i <= Constants.AMOUNTDEACTIVE; i++){
 
                 Pages.adsPage().scrollToProduct(i);
 

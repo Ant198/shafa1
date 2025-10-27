@@ -3,6 +3,7 @@ package com.demo;
 import com.demo.actions.Actions;
 import com.demo.core.base.BaseTest;
 import com.demo.pages.Pages;
+import com.demo.utils.Constants;
 import com.demo.utils.FileUploader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -28,8 +29,9 @@ public class ActiveAdsTest extends BaseTest {
             System.out.println("Обработка активный товаров ->");
 
             try{
+                Constants.AMOUNTACTIVE = Pages.adsPage().getActiveProductsAmount();
                 //обробка активних оголошень
-                for(int i = 1; i < Pages.adsPage().getActiveProductsAmount(); i++) {
+                for(int i = 1; i <= Constants.AMOUNTACTIVE; i++) {
 
                     Pages.adsPage().scrollToProduct(i);
 
