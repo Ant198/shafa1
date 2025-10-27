@@ -55,21 +55,12 @@ public class AdsPage extends PageTools {
         //click(product);
     }
 
-    public void scrollToProduct(int index){
+    public void scrollOnPixels(int index){
         By product = By.xpath(title + "[" + index + "]");
-        if(!isElementVisible(product))
-            if(index / 16 > 0){
-                for(int i = 1; i < (index / 16) + 1; i++){
-                    int scrollIndex = 16 * i;
-                    scrollToPlaceElementInCenter(By.xpath(title + "[" + scrollIndex + "]"));
-                    System.out.println("Скролл...");
-
-            }
-            Selenide.sleep(1000);
+        while(!isElementVisible(product)){
+            scrollByPixels("2000");
+            System.out.println("Скролл...");
         }
-            else {
-                scrollToPlaceElementInCenter(product);
-            }
     }
 
     public int getActiveProductsAmount(){

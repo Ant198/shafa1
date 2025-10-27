@@ -34,15 +34,15 @@ public class ActiveAdsTest extends BaseTest {
                 //обробка активних оголошень
                 for(int i = 1500; i <= Constants.AMOUNTACTIVE; i++) {
 
-                    Pages.adsPage().scrollToProduct(i);
+                    Pages.adsPage().scrollOnPixels(i);
 
                     System.out.println("Продукт " + i);
 
                     Actions.productActions().CheckActive(String.valueOf(i));
-                    /*if (i%500 == 0) {
+                    if (i%500 == 0) {
                         SelenideTools.refresh();
                         Pages.adsPage().closeBanner();
-                    }*/
+                    }
                 }
 
 

@@ -35,15 +35,15 @@ public class DeActiveAdsTest extends BaseTest {
             //обробка неактивних оголошень
             for(int i = 1; i <= Constants.AMOUNTDEACTIVE; i++){
 
-                Pages.adsPage().scrollToProduct(i);
+                Pages.adsPage().scrollOnPixels(i);
 
                 System.out.println("Продукт " + i);
 
                 Actions.productActions().CheckDeActive(String.valueOf(i));
-                /*if (i%500 == 0) {
+                if (i%500 == 0) {
                     SelenideTools.refresh();
                     Pages.adsPage().closeBanner();
-                }*/
+                }
             }
         } catch (Exception e){
             e.printStackTrace();
