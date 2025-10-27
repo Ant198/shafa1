@@ -32,7 +32,7 @@ public class ActiveAdsTest extends BaseTest {
             try{
                 Constants.AMOUNTACTIVE = Pages.adsPage().getActiveProductsAmount();
                 //обробка активних оголошень
-                for(int i = 1500; i <= Constants.AMOUNTACTIVE; i++) {
+                for(int i = 1; i <= Constants.AMOUNTACTIVE; i++) {
 
                     Pages.adsPage().scrollOnPixels(i);
 
