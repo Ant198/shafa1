@@ -89,7 +89,7 @@ public class ProductActions extends PageTools {
                 if (realQty == 0 ) {
                     System.out.println("Товару нема в наявності... Деактивуємо");
                     Pages.adPage().clickDeActivateButton();
-                    Constants.AMOUNTACTIVE =- 1;
+                    Constants.AMOUNTACTIVE -= 1;
                     writeError(id + " | " + name + " | оголошення було деактивоване(немає в наявності) ", "success.txt");
                     goBack();
                 }
@@ -165,7 +165,7 @@ public class ProductActions extends PageTools {
 
             if (realQty != 0) {
                 Pages.adsPage().clickActivateButton(index);
-                Constants.AMOUNTDEACTIVE =- 1;
+                Constants.AMOUNTDEACTIVE -= 1;
                 Pages.adsPage().openProductInNewTab(Integer.parseInt(index));
                 Selenide.sleep(2000);
 
