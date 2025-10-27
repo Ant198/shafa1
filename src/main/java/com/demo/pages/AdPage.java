@@ -78,9 +78,9 @@ public class AdPage extends PageTools {
         return Integer.parseInt(getQtyStr());
     }
 
-    public int getPrimaryPrice(){
+    public float getPrimaryPrice(){
         String price = getPriceStr().substring(0, getPriceStr().indexOf(' '));
-        return Integer.parseInt(price);
+        return Float.parseFloat(price);
     }
 
 

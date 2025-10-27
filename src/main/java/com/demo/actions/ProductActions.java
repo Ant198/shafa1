@@ -80,7 +80,7 @@ public class ProductActions extends PageTools {
             Pages.adPage().quantityToUpdate = quantityStr;
 
             int realQty = Integer.parseInt(quantityStr.trim());
-            int realPrice = Integer.parseInt(price.substring(0,price.indexOf('.')-1));
+            float realPrice = Float.parseFloat(price);
 
             System.out.println("Кількість в файлі: " + realQty + ", Кількість на сайті: " + Pages.adPage().getPrimaryQty());
             System.out.println("Ціна в файлі: " + realPrice + ", Ціна на сайті: " + Pages.adPage().getPrimaryPrice());
@@ -161,7 +161,7 @@ public class ProductActions extends PageTools {
             String quantityStr = xpath.evaluate("quantity_in_stock", offer);
 
             int realQty = Integer.parseInt(quantityStr.trim());
-            int realPrice = Integer.parseInt(priceStr.substring(0,priceStr.indexOf('.')-1));
+            float realPrice = Float.parseFloat(priceStr);
 
             if (realQty != 0) {
                 Pages.adsPage().clickActivateButton(index);
