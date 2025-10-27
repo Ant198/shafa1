@@ -5,6 +5,7 @@ import com.demo.actions.ProductActions;
 import com.demo.core.base.BaseTest;
 import com.demo.pages.Pages;
 import com.demo.utils.Constants;
+import com.demo.utils.SelenideTools;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -39,7 +40,10 @@ public class DeActiveAdsTest extends BaseTest {
                 System.out.println("Продукт " + i);
 
                 Actions.productActions().CheckDeActive(String.valueOf(i));
-                //if (i ==20 ) break;
+                if (i%500 == 0) {
+                    SelenideTools.refresh();
+                    Pages.adsPage().closeBanner();
+                }
             }
         } catch (Exception e){
             e.printStackTrace();
