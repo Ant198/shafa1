@@ -33,7 +33,7 @@ public class AdsPage extends PageTools {
 
 
     public void closeBanner(){
-        if(isElementClickable(bannerCross)){
+        if(isElementVisible(bannerCross)){
             click(bannerCross);
         };
     }

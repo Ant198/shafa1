@@ -15,6 +15,8 @@ public class AdPage extends PageTools {
     private final By deActivateButton = By.xpath("//button[text()='Деактивувати']");
     private final By activateButton = By.xpath("//button[text()='Активувати']");
     private final By size = By.xpath("//div[@class='b-properties__label' and text()='Розмір:']");
+    private final By primaryPrice = By.xpath("//div[contains(@class,'b-product__price')]//p");
+    private final By primaryQty = By.xpath("//li[span[text()='Наявність:']]//span[@class='b-product-stats__value']");
     public String priceToUpdate = "";
     public String quantityToUpdate = "";
     private By deActivated = By.xpath("//div[p[text()='Деактивований']]");
@@ -23,6 +25,14 @@ public class AdPage extends PageTools {
 
     public void clickEditButton(){
         click(editButton);
+    }
+
+    private String getPriceStr() {
+        return getElementText(primaryPrice);
+    }
+
+    private String getQtyStr() {
+        return getElementText(primaryQty);
     }
 
     public void clickActivateButton(){
@@ -65,11 +75,12 @@ public class AdPage extends PageTools {
     }
 
     public int getPrimaryQty(){
-        return Integer.parseInt($(By.xpath("//li[span[text()='Наявність:']]//span[@class='b-product-stats__value']")).getText());
+        return Integer.parseInt(getQtyStr());
     }
 
     public int getPrimaryPrice(){
-        return Integer.parseInt($(By.xpath("//span[@class='b-product-price__current']/span")).getText());
+        String price = getPriceStr().substring(0, getPriceStr().indexOf(' '));
+        return Integer.parseInt(price);
     }
 
 
