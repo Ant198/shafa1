@@ -5,6 +5,7 @@ import com.demo.core.base.BaseTest;
 import com.demo.pages.Pages;
 import com.demo.utils.Constants;
 import com.demo.utils.FileUploader;
+import com.demo.utils.SelenideTools;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -38,7 +39,7 @@ public class ActiveAdsTest extends BaseTest {
                     System.out.println("Продукт " + i);
 
                     Actions.productActions().CheckActive(String.valueOf(i));
-                    //if (i == 20) break;
+                    if (i == 500) SelenideTools.refresh();
                 }
 
 
