@@ -1,7 +1,6 @@
 package com.demo;
 
 import com.demo.actions.Actions;
-import com.demo.actions.ProductActions;
 import com.demo.core.base.BaseTest;
 import com.demo.pages.Pages;
 import com.demo.utils.Constants;
@@ -35,7 +34,7 @@ public class DeActiveAdsTest extends BaseTest {
             //обробка неактивних оголошень
             for(int i = 1; i <= Constants.AMOUNTDEACTIVE; i++){
 
-                Pages.adsPage().scrollOnPixels(i);
+                Pages.adsPage().scrollToProductByPixels(i);
 
                 System.out.println("Продукт " + i);
 

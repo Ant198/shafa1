@@ -24,6 +24,7 @@ public class AdPage extends PageTools {
 
 
     public void clickEditButton(){
+        waitForElementVisibility(editButton);
         click(editButton);
     }
 

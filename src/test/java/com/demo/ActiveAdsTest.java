@@ -34,7 +34,7 @@ public class ActiveAdsTest extends BaseTest {
                 //обробка активних оголошень
                 for(int i = 1; i <= Constants.AMOUNTACTIVE; i++) {
 
-                    Pages.adsPage().scrollOnPixels(i);
+                    Pages.adsPage().scrollToProductByPixels(i);
 
                     System.out.println("Продукт " + i);
 

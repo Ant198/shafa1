@@ -19,6 +19,7 @@ public class AdsPage extends PageTools {
     private final int deActiveProductsAmount = Integer.parseInt($(By.xpath("//li[a[text()='Деактивовані']]//span")).getText());
 
     public void clickActivateButton(String index) {
+        waitForElementClickable(activateAdButton, String.format("[%s]", index));
         click(activateAdButton, String.format("[%s]", index));
         Selenide.sleep(500);
     }
@@ -55,12 +56,13 @@ public class AdsPage extends PageTools {
         //click(product);
     }
 
-    public void scrollOnPixels(int index){
+    public void scrollToProductByPixels(int index){
         By product = By.xpath(title + "[" + index + "]");
         while(!isElementVisible(product)){
             scrollByPixels("2000");
             System.out.println("Скролл...");
         }
+        scrollToElement(product);
     }
 
     public int getActiveProductsAmount(){
