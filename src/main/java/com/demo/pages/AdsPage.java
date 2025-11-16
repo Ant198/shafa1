@@ -2,7 +2,9 @@ package com.demo.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.demo.core.base.PageTools;
+import com.demo.utils.SelenideTools;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.demo.utils.SelenideTools.*;
@@ -34,6 +36,7 @@ public class AdsPage extends PageTools {
 
 
     public void closeBanner(){
+        sleep(1);
         if(isElementVisible(bannerCross)){
             click(bannerCross);
         };
@@ -58,9 +61,20 @@ public class AdsPage extends PageTools {
 
     public void scrollToProductByPixels(int index){
         By product = By.xpath(title + "[" + index + "]");
+        int count1 = 0, count2 = 0;
         while(!isElementVisible(product)){
             scrollByPixels("2000");
+            Selenide.sleep(100);
             System.out.println("Скролл...");
+            if (count1%1000 == 0){
+                refresh();
+                SelenideTools.sleep(2);
+                if (count2>5) {
+                    Assert.fail("Infinity scroll");
+                }
+                count2++;
+            }
+            count1++;
         }
         scrollToElement(product);
     }
