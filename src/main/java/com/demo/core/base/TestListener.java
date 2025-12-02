@@ -27,8 +27,8 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         LOG.error("FAILED test: {}", getTestMethodName(iTestResult));
-//        AllureTools.attachScreenshot();
-//        AllureTools.attachLogFile();
+        AllureTools.attachScreenshot();
+        AllureTools.attachLogFile();
     }
 
     @Override

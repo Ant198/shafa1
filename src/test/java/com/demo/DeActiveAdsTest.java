@@ -12,12 +12,11 @@ import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.fail;
 
-@Epic("Test Epic")
-@Feature("Test feature")
+@Epic("Shafa")
 @Owner("QA Yaroslav Rymarchuk")
 public class DeActiveAdsTest extends BaseTest {
 
-    @Test(description = "shafaAutomatization")
+    @Test(description = "DeActive")
     public void shafaTest() {
 
         Actions.loginActions().login();
@@ -26,7 +25,7 @@ public class DeActiveAdsTest extends BaseTest {
 
         Pages.adsPage().clickDeActiveAdsButton();
 
-        System.out.println("Обработка неактивных товаров ->");
+        System.out.println("Обробка неактивних товарів ->");
 
 
         try{
@@ -46,7 +45,7 @@ public class DeActiveAdsTest extends BaseTest {
             }
         } catch (Exception e){
             e.printStackTrace();
-            fail("Тест упал из-за исключения: " + e.getMessage());
+            fail("Тест впав через помилку: " + e.getMessage());
         }
 
 

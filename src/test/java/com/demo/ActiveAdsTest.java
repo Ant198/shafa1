@@ -7,18 +7,16 @@ import com.demo.utils.Constants;
 import com.demo.utils.FileUploader;
 import com.demo.utils.SelenideTools;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.fail;
 
-@Epic("Test Epic")
-@Feature("Test feature")
+@Epic("Shafa")
 @Owner("QA Yaroslav Rymarchuk")
 public class ActiveAdsTest extends BaseTest {
 
-    @Test(description = "shafaAutomatization")
+    @Test(description = "Active")
     public void shafaTest() {
 
         FileUploader.uploadFileToJenkins();
@@ -27,7 +25,7 @@ public class ActiveAdsTest extends BaseTest {
 
             Actions.mainActions().goToAds();
 
-            System.out.println("Обработка активный товаров ->");
+            System.out.println("Обробка активних товарів ->");
 
             try{
                 Constants.AMOUNTACTIVE = Pages.adsPage().getActiveProductsAmount();
@@ -48,7 +46,7 @@ public class ActiveAdsTest extends BaseTest {
 
             } catch (Exception e){
                 e.printStackTrace();
-                fail("Тест упал из-за исключения: " + e.getMessage());
+                fail("Тест впав через помилку: " + e.getMessage());
             }
 
 
