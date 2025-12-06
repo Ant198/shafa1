@@ -8,6 +8,7 @@ import com.demo.utils.FileUploader;
 import com.demo.utils.SelenideTools;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.fail;
@@ -46,7 +47,7 @@ public class ActiveAdsTest extends BaseTest {
 
             } catch (Exception e){
                 e.printStackTrace();
-                fail("Тест впав через помилку: " + e.getMessage());
+                Assert.fail("Тест впав через помилку: " + e.getMessage());
             }
 
 

@@ -8,9 +8,9 @@ import com.demo.utils.SelenideTools;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.AssertJUnit.fail;
 
 @Epic("Shafa")
 @Owner("QA Yaroslav Rymarchuk")
@@ -45,7 +45,7 @@ public class DeActiveAdsTest extends BaseTest {
             }
         } catch (Exception e){
             e.printStackTrace();
-            fail("Тест впав через помилку: " + e.getMessage());
+            Assert.fail("Тест впав через помилку: " + e.getMessage());
         }
 
 

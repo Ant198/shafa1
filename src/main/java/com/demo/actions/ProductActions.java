@@ -27,7 +27,7 @@ public class ProductActions extends PageTools {
         String nameToFind = getTitle(index);       // если нет vendorCode
 
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
-        String filePathStr = System.getenv("UPLOAD_FILE");
+        String filePathStr = /*System.getenv("UPLOAD_FILE"); */"products_feed.xml";
         if (filePathStr == null) {
             throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
@@ -69,10 +69,11 @@ public class ProductActions extends PageTools {
             String id = offer.getAttributes().getNamedItem("id").getNodeValue();
             String name = xpath.evaluate("name", offer);
             String price = xpath.evaluate("price", offer);
-            String quantityStr = xpath.evaluate("quantity_in_stock", offer);
+            String q;
+            String quantityStr = (q = xpath.evaluate("quantity_in_stock", offer)).isBlank() ? "0" : q;
 
             Pages.adsPage().openProductInNewTab(Integer.parseInt(index));
-            Selenide.sleep(2000);
+            SelenideTools.sleep(2);
             Pages.adPage().priceToUpdate = price;
             if(Integer.parseInt(quantityStr) > 100){
                 quantityStr = "100";
@@ -116,7 +117,7 @@ public class ProductActions extends PageTools {
         String nameToFind = getTitle(index);       // если нет vendorCode
 
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
-        String filePathStr = System.getenv("UPLOAD_FILE");
+        String filePathStr = /*System.getenv("UPLOAD_FILE"); */"products_feed.xml";
         if (filePathStr == null) {
             throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
@@ -160,14 +161,20 @@ public class ProductActions extends PageTools {
             String priceStr = xpath.evaluate("price", offer);
             String quantityStr = xpath.evaluate("quantity_in_stock", offer);
 
-            int realQty = Integer.parseInt(quantityStr.trim());
+            int realQty;
+
+            if (quantityStr == null || quantityStr.isBlank()) {
+                realQty = 0;
+            } else {
+                realQty = Integer.parseInt(quantityStr.trim());
+            }
             float realPrice = Float.parseFloat(priceStr);
 
             if (realQty != 0) {
                 Pages.adsPage().clickActivateButton(index);
                 Constants.AMOUNTDEACTIVE -= 1;
                 Pages.adsPage().openProductInNewTab(Integer.parseInt(index));
-                Selenide.sleep(2000);
+                SelenideTools.sleep(2);
 
                 Pages.adPage().priceToUpdate = priceStr;
                 if (Integer.parseInt(quantityStr) > 100) {
