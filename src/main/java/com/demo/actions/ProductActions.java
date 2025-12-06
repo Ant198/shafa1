@@ -27,7 +27,7 @@ public class ProductActions extends PageTools {
         String nameToFind = getTitle(index);       // если нет vendorCode
 
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
-        String filePathStr = /*System.getenv("UPLOAD_FILE"); */"products_feed.xml";
+        String filePathStr = System.getenv("UPLOAD_FILE");
         if (filePathStr == null) {
             throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
@@ -117,7 +117,7 @@ public class ProductActions extends PageTools {
         String nameToFind = getTitle(index);       // если нет vendorCode
 
         // Получаем путь к загруженному файлу из переменной окружения Jenkins
-        String filePathStr = /*System.getenv("UPLOAD_FILE"); */"products_feed.xml";
+        String filePathStr = System.getenv("UPLOAD_FILE");
         if (filePathStr == null) {
             throw new IllegalStateException("Змінна середи UPLOAD_FILE не встановлена!");
         }
