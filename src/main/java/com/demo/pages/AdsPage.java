@@ -23,7 +23,7 @@ public class AdsPage extends PageTools {
     public void clickActivateButton(String index) {
         waitForElementClickable(activateAdButton, String.format("[%s]", index));
         click(activateAdButton, String.format("[%s]", index));
-        Selenide.sleep(500);
+        Selenide.sleep(2000);
     }
 
     public void clickActiveAdsButton(){
